@@ -35,14 +35,14 @@ var defaultHowPaidOptionsHtml = "";
 if(appType=="simple")
 {
     defaultCodeOptionsHtml = '<option value="0">Auto Expenses</option> <option value="0">Food/Sundries</option><option value="0">Home Maintenance</option><option value="0">Insurance</option><option value="0">Medical</option><option value="0">Housing</option><option value="0">Telephone</option><option value="0">Utilities</option><option value="0">Dependent Expenses</option><option value="0">Personal Expenses</option><option value="0">Spouse/Partner Expenses</option><option value="0">Pet Expenses</option><option value="0">Credit Card Payments</option><option value="0">Loans & Notes Payable</option><option value="0">Taxes</option><option value="0">Donations/Gifts</option><option value="0">Entertainment</option><option value="0">Investments</option><option value="0">Retirement</option><option value="0">Savings</option><option value="0">Vacations</option><option value="0">Open</option>';
-    defaultHowPaidOptionsHtml = "<option>CASH</option> <option>BK#0001</option> <option>BK#0002</option> <option>BK#0003</option> <option>BK#0004</option> <option>BK#0005</option> <option>BK#0006</option> <option>BK#0007</option> <option>BK#0008</option> <option>BK#0009</option> <option>BK#0010</option> <option>BK#9999</option> <option>CC#0001</option> <option>CC#0002</option> <option>CC#0003</option> <option>CC#0004</option> <option>CC#0005</option> <option>CC#0006</option> <option>CC#0007</option> <option>CC#0008</option> <option>CC#0009</option> <option>CC#9999</option> <option>LOC#001</option> <option>LOC#002</option> <option>LOC#003</option>";
+    defaultHowPaidOptionsHtml = "<option>CASH</option><option>TBP</option><option>ALLOCATE</option><option>ADJ./MP</option><option>BK#0001</option><option>BK#0002</option><option>BK#0003</option><option>BK#0004</option><option>BK#0005</option><option>BK#0006</option><option>BK#0007</option><option>BK#0008</option><option>BK#0009</option><option>BK#0010</option><option>BK#9999</option><option>CC#0001</option><option>CC#0002</option><option>CC#0003</option><option>CC#0004</option><option>CC#0005</option><option>CC#0006</option><option>CC#0007</option><option>CC#0008</option><option>CC#0009</option><option>CC#9999</option><option>LOC#001</option><option>LOC#002</option><option>LOC#003</option>";
 
 }
 
 if(appType=="tmm")
 {
     defaultCodeOptionsHtml = '<option value="100">3001 Primary Wage Earner #1</option><option value="0">3002 Primary Wage Earner #2</option><option value="1">3003 Investment Income</option><option value="2">3004 Other (Source)</option><option value="3">3005 Reserve Transfers</option><option value="0">4006 Auto Expenses</option><option value="0">4007 Food/Sundries</option><option value="0">4008 Home Maintenance</option><option value="0">4009 Insurance</option><option value="0">4010 Medical</option><option value="0">4011 Housing</option><option value="0">4012 Telephone</option><option value="0">4013 Utilities</option><option value="0">4014 Open</option><option value="0">4015 Open</option><option value="0">4016 Unidentified Cash w/d</option><option value="0">4017 Open</option><option value="0">4018 Open</option><option value="0">4019 Open</option><option value="0">4020 Open</option><option value="0">4021 Open</option><option value="0">4517 Child#1-A</option><option value="0">4517 Child#2-B</option><option value="0">4517 Child#3-C</option><option value="0">4517 Child#4-D</option><option value="0">4517 Child#5-E</option><option value="0">4518 for Primary Wage Earner #1</option><option value="0">4519 for Primary Wage Earner #2</option><option value="0">4520 Pet #1-A</option><option value="0">4520 Pet #2-B</option><option value="0">4521 Open</option><option value="0">5023 Medical Debt / Fees / Charges</option><option value="0">5024 Loans & Notes Payable</option><option value="0">5025 Tax Debt / Estimated Tax</option><option value="0">5026 Open</option><option value="0">6028 Donations/Gifts</option><option value="0">6029 Entertainment</option><option value="0">6032 Savings</option><option value="0">6033 Vacations</option>';
-    defaultHowPaidOptionsHtml = "<option>CASH</option><option>ALLOCATE</option><option>ADJ./MP</option><option>BK#0001</option><option>BK#0002</option><option>BK#0003</option><option>BK#0004</option><option>BK#0005</option><option>BK#0006</option><option>BK#0007</option><option>BK#0008</option><option>BK#0009</option><option>BK#0010</option><option>BK#9999</option><option>CC#0001</option><option>CC#0002</option><option>CC#0003</option><option>CC#0004</option><option>CC#0005</option><option>CC#0006</option><option>CC#0007</option><option>CC#0008</option><option>CC#0009</option><option>CC#9999</option><option>LOC#001</option><option>LOC#002</option><option>LOC#003</option>";
+    defaultHowPaidOptionsHtml = "<option>CASH</option><option>TBP</option><option>ALLOCATE</option><option>ADJ./MP</option><option>BK#0001</option><option>BK#0002</option><option>BK#0003</option><option>BK#0004</option><option>BK#0005</option><option>BK#0006</option><option>BK#0007</option><option>BK#0008</option><option>BK#0009</option><option>BK#0010</option><option>BK#9999</option><option>CC#0001</option><option>CC#0002</option><option>CC#0003</option><option>CC#0004</option><option>CC#0005</option><option>CC#0006</option><option>CC#0007</option><option>CC#0008</option><option>CC#0009</option><option>CC#9999</option><option>LOC#001</option><option>LOC#002</option><option>LOC#003</option>";
 }
 
 
@@ -620,6 +620,24 @@ function howPaidCheck(el)
         el.value = "CASH";
         return;
     }
+    if($(el).next().val().toString() == "TBP")
+    {
+        alert("TBP canot be edited");
+        el.value = "TBP";
+        return;
+    }
+    if($(el).next().val().toString() == "ALLOCATE")
+    {
+        alert("ALLOCATE canot be edited");
+        el.value = "ALLOCATE";
+        return;
+    }
+    if($(el).next().val().toString() == "ADJ./MP")
+    {
+        alert("ADJ./MP canot be edited");
+        el.value = "ADJ./MP";
+        return;
+    }
 
     // at least some digits after # must be!
     console.log("e"+el.value.length+el.value);
@@ -832,6 +850,23 @@ function dbUpdater2(el)
 
         rowUpdatedID = $(el).parent().parent().attr("data-id");
         db.rowUpdateInsert();
+
+        if($(el).closest('span').hasClass("paid"))
+        {
+            var a = $(el).closest('li');
+            if($(el).val()=="TBP")
+            {
+                //$(el).attr("readonly",true);
+                a.css("background","yellow");
+                a.find("input").css("background","yellow");
+            } else
+            {
+                //$(el).attr("readonly",false);
+                a.css("background","white");
+                a.find("input").css("background","white");
+            }
+        }
+
         //db.transaction(dbUpdateQ, errorCB);
     }
     return run;
@@ -907,13 +942,13 @@ function lastSyncOK(showAlert)
         currentDate = new Date();
         var ar = lastSyncDate.split("-");
         d_lastExportDate = new Date(ar[0],ar[1]-1,ar[2],ar[3],ar[4]);
-        logging("last export date: " + d_lastExportDate);
-        logging("current date: " + currentDate);
+        logging("last export month: " + Number(d_lastExportDate.getMonth()+1));
+        logging("current month: " + Number(currentDate.getMonth()+1));
 
         var oneDay = 24*60*60*1000;
         var diffDays = Math.round(Math.abs((currentDate.getTime() - d_lastExportDate.getTime())/(oneDay)));
         //diffDays = 50;
-        logging("diff days: " + diffDays);
+        //logging("diff days: " + diffDays);
         var maxDays;
         if(appType=="simple")
         {
@@ -922,7 +957,8 @@ function lastSyncOK(showAlert)
         {
             maxDays = 30;
         }
-        if(diffDays>45)
+        //if(diffDays>45)
+        if(currentDate.getMonth()!=d_lastExportDate.getMonth())
         {
             if(showAlert)
             {

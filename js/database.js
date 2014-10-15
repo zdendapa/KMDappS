@@ -20,7 +20,7 @@ var lastSyncDate;   // date of last sync
 
 var db = {
     settings: {
-        shortName: 'kmds_d',
+        shortName: 'kmds_e',
         version: '1.0',
         displayName: 'KMD app',
         maxSize: 655367 // in bytes
@@ -114,6 +114,7 @@ db.initSheetsData = function()
         tx.executeSql('SELECT code,value FROM code', [], function(tx, results)
         {
             len = results.rows.length;
+            $(".instructions div.pickUp").empty();
             if(len>0)
             {
 
@@ -154,8 +155,7 @@ db.initSheetsData = function()
                 }
 
                 $("div.instruction").append("<div class='checkboxes'>");
-                $(".instructions div.pickUp").empty();
-                $(".instructions div.pickUp").append(newHtml);
+                $(".instructions div.pickUp").append("<h1>Pick any choice to create a new page.</h1>"+newHtml);
 
 
                 /*
@@ -405,6 +405,7 @@ db.loadSheet = function()
                     var readonly = "";
                     var disabled = "";
                     var classAdd = "";
+                    var tbpStyle ="";
                     if(results.rows.item(i).synced=="x")
                     {
                         readonly = "readonly";
@@ -416,13 +417,25 @@ db.loadSheet = function()
 
                     // select right option on the select
 
-
+                    var li = $("ul.content").find("li[data-id='"+results.rows.item(i).rowid+"']");
                     if(isNaN(results.rows.item(i).paid))
                     {
-                        $("ul.content").find("li[data-id='"+results.rows.item(i).rowid+"']").find("select").val(paid);
+
+                        li.find("select").val(paid);
+                        if(li.find("select").text()=="TBP")
+                        {
+                            li.css("background","yellow");
+                            li.find("input").css("background","yellow");
+                        }
+
                     } else
                     {
-                        $("ul.content").find("li[data-id='"+results.rows.item(i).rowid+"']").find("select").find("option").eq(results.rows.item(i).paid).prop('selected', true);
+                        li.find("select").find("option").eq(results.rows.item(i).paid).prop('selected', true);
+                        if(paid=="TBP")
+                        {
+                            li.css("background","yellow");
+                            li.find("input").css("background","yellow");
+                        }
                     }
 
                     lastRowID = i + 1;
