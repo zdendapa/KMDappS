@@ -23,6 +23,7 @@ var lastRowID = 0;
 var sheetCurrent = 0;
 var rowUpdatedID = 0;
 var rowEdited = 0;
+var elFocused = 0;
 var categorySelectPrev = "Instructions";
 var firstInsert = false;
 var inputValue;
@@ -348,6 +349,10 @@ function clickInit()
 
     $(document).on('focus', '.content .payment input', function() {
         this.value='';
+    });
+
+    $(document).on('focus', '.content li', function() {
+        elFocused = this;
     });
 
     $(document).on('focusout', '.content .payment input', function() {
@@ -748,9 +753,17 @@ function categorySelectUpdate()
 function buttonDelete()
 {
 
-    if(rowEdited == 0)
+    if(elFocused == 0)
     {
         alert("Please select row and then tap Delete Line");
+        return;
+    }
+    else
+    {
+
+        db.deleteRow($(elFocused).attr("data-id"));
+        $(elFocused).remove();
+
     }
 
     return;

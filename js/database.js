@@ -767,6 +767,14 @@ db.deleteShid = function(success_callback)
 
 };
 
+db.deleteRow = function(rowid,success_callback)
+{
+    database.transaction(function(tx) {
+        var shid = shidCurrentGet();
+        tx.executeSql('DELETE FROM sheetsdata WHERE shid='+shid+' AND rowid='+ rowid);
+    }, errorCB, success_callback);
+
+};
 
 
 db.pieDataGetShid = function(success_callback)
