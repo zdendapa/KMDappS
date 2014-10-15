@@ -25,7 +25,7 @@
         Enable individual API permissions here.
         The "device" permission is required for the 'deviceready' event.
     -->
-    <gap:plugin name="com.plugin.datepicker" version="0.3.2" />
+    <gap:plugin name="com.plugin.datepicker"/>
     <gap:plugin name="org.apache.cordova.device" version="0.2.8" />
     <gap:plugin name="org.apache.cordova.file" version="1.0.1" />
     <gap:plugin name="org.apache.cordova.file-transfer" version="0.4.2" />
