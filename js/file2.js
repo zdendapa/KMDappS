@@ -459,7 +459,7 @@ function generateXML(writeIt)
                         {
                             xmlString += "</tableData></sheet>";
                         }
-                        xmlString += "<sheet><header><shid>"+results.rows.item(i).shid+"</shid><category>" + xmlSpecCharEn(results.rows.item(i).category) + "</category><planSpend>"+results.rows.item(i).planSpend+"</planSpend><code>"+results.rows.item(i).code+"</code></header><tableData>";
+                        xmlString += "<sheet><header><shid>"+results.rows.item(i).shid+"</shid><code>" + xmlSpecCharEn(results.rows.item(i).category) + "</code><planSpend>"+results.rows.item(i).planSpend+"</planSpend></header><tableData>";
                         shidBefore = true;
                         shid = results.rows.item(i).shid;
                     }

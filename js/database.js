@@ -20,7 +20,7 @@ var lastSyncDate;   // date of last sync
 
 var db = {
     settings: {
-        shortName: 'kmds_b',
+        shortName: 'kmds_c',
         version: '1.0',
         displayName: 'KMD app',
         maxSize: 655367 // in bytes
@@ -615,7 +615,7 @@ db.importSheets = function(xml,success_callback)
                 //console.log(category[0].firstChild.nodeValue);
                 //tx.executeSql('INSERT INTO sheetsheaders (shid, category, code, planSpend) VALUES ('+sheet.getElementsByTagName("shid")[0].firstChild.nodeValue+','+sheet.getElementsByTagName("category")[0].firstChild.nodeValue+','+Encoder.htmlDecode(sheet.getElementsByTagName("code")[0].firstChild.nodeValue)+', '+sheet.getElementsByTagName("planSpend")[0].firstChild.nodeValue+')');
                 //tx.executeSql('INSERT INTO sheetsheaders (shid, category, code, planSpend) VALUES ('+sheet.getElementsByTagName("shid")[0].firstChild.nodeValue+','+getXmlNodeValue(sheet,"category")+','+getXmlNodeValue(sheet,"code")+', '+getXmlNodeValue(sheet,"planSpend")+')');
-                tx.executeSql('INSERT INTO sheetsheaders (shid, category, code, planSpend) VALUES (?,?,?,?)', [sheet.getElementsByTagName("shid")[0].firstChild.nodeValue,getXmlNodeValue(sheet,"category"),getXmlNodeValue(sheet,"code"),getXmlNodeValue(sheet,"planSpend")]);
+                tx.executeSql('INSERT INTO sheetsheaders (shid, category, code, planSpend) VALUES (?,?,?,?)', [sheet.getElementsByTagName("shid")[0].firstChild.nodeValue,getXmlNodeValue(sheet,"code"),getXmlNodeValue(sheet,"code"),getXmlNodeValue(sheet,"planSpend")]);
                   //console.log('INSERT INTO sheetsheaders (shid, category, code, planSpend) VALUES ('+sheet.getElementsByTagName("shid")[0].firstChild.nodeValue+','+getXmlNodeValue(sheet,"category")+','+getXmlNodeValue(sheet,"code")+', '+getXmlNodeValue(sheet,"planSpend")+')');
 
                 var rows =  sheet.getElementsByTagName("row");
