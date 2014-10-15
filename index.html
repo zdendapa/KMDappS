@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <!-- <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=2, minimum-scale=1, target-densitydpi=device-dpi" />-->
+
+    <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=4, minimum-scale=1, target-densitydpi=device-dpi" />
+
+    <script>
+
+        // main set
+        var workLocal = true; // run on local desktop
+
+        var exportAutomatic = false;
+        var menuButtonWork = true;
+        var showConsole = false; // shows console in app
+        var confNewPageAvailable = false;
+        var noFileForInport = true;
+// ---------- app set
+        /*
+        simple - no fileSuport
+        custom -
+         */
+        var appType = "tmm";
+
+        var fileSupportOff = false; // it will not read data on start end export them. It will hide button Save
+        var fileLoadOnStart = true;
+
+        if(appType == "simple")
+        {
+            fileSupportOff = true;
+        }
+
+
+// ----------- delepores features
+        var testFirst = false; // first run of application
+        var testFileModifiedByExter = ""; // simulate sync file modified date - testFileModifiedByExter = "2014-6-30-16-17";
+
+        var testXMLSave = false; // save fake xml instead of database data
+        var testNoDB = false;
+        var testStaticApp = false;
+        var testParticularHack = false;
+        var loggingAlert = false;
+
+// ----------- hack! run all above features here:
+        if(workLocal)
+        {
+
+            testFirst= true;
+            //var testFileModifiedByExter = "2014-6-30-16-17";
+            //loggingAlert = true;
+
+            if(testStaticApp)
+            {
+                testNoDB = true;
+                testParticularHack = true;
+                testFirst = true;
+            }
+
+
+
+
+            //testXMLSave= true;
+            // force to read xml = change date by:
+            //testFirst = true;
+            //testFileModifiedByExter = "2014-6-30-16-17";
+        }
+// ----------- end of hack
+
+        var pgReady = false;
+
+
+        function onLoad() {
+            if(workLocal)
+                onDeviceReady();
+            else
+                document.addEventListener("deviceready", onDeviceReady, false);
+        }
+
+
+    </script>
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="phonegap.js"></script>
+    <script src="file.js"></script>
+    <script src="file-transfer.js"></script>
+
+    <script src="js/file2.js"></script>
+    <script src="js/javascript.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/fastclick.js"></script>
+    <script src="js/encoder.js"></script>
+    <link rel="stylesheet" href="css/css.css" />
+
+    <script src="js/jquery.jqplot.min.js"></script>
+    <script src="js/jqplot.pieRenderer.js"></script>
+    <link rel="stylesheet" href="css/jquery.jqplot.css" />
+
+    <title>i-Count</title>
+</head>
+
+<body style="display: none" onload="onLoad()">
+<div class="topMenu">
+
+    <div id="categorySelectPrev" class="row rowLeft2">
+        <span>Prev Entry</span>
+    </div>
+
+    <div class="topMenuMiddle">
+        <div style="display: none" class="row" onclick="newWTable()">
+            New
+        </div>
+        <div class="categoryWidget">
+            <select id="categorySelect" class="registraceSelectButtons" onchange="categorySelectonchange()"></select>
+        </div>
+    </div>
+    <div class="row delete" onclick="buttonDelete()">Delete Line</div><!--
+  --><div class="space"></div><!--
+  --><div id="buttonSave" class="row" onclick="buttonSave()">Save</div><!--
+  --><div class="space"></div><!--
+  --><div id="categorySelectNext" class="row rowRight2">
+        <span></span>
+    </div>
+</div>
+<div class="main">
+    <div class="sheets">
+        <div id="first">
+            <div class="mainHeader">
+                <div class="img">
+                    <img src="img/LittleGuyLogoBig.jpg">
+                </div><!--
+             --><div class="menu">
+                    <h1 class="menuButton" onclick="showMenu()">MENU</h1>
+                    <label id="month">month Of:</label>
+                </div><!--
+             --><div class="plan">
+                    <label>Monthly Money Plan Budget</label>
+                <img class="pie" src="img/pie.png" onclick="tableSummShow()">
+                </div><!--
+                --><div class="planInput">
+                <input id="planSpend" readonly>
+            </div>
+                <div style="clear: both; float: none"></div>
+            </div>
+            <div class="table">
+                <div class="tableHeader">
+                    <div class="oneLine">Date</div>
+                    <div class="description">Payable To</div>
+                    <div class="twoLines">How Paid</div>
+                    <div class="twoLines">Check or Ref#</div>
+                    <div class="twoLines">Payment<br>Amount</div>
+                    <div class="balance">Available Balance</div>
+                </div>
+                <ul class="content">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="instructions">
+        <img width="100%" src="img/COMPANIONINSTRUCTIONS.jpg">
+        <div class="pickUp">
+            <h1>Pick any choice to create a new page.</h1>
+        </div>
+    </div>
+    <div class="piePage">
+        <div class="pieDelete gradGrey" onclick="pieHide()">Back</div>
+        <h1>Category: Auto</h1>
+        <div class="pieWrapper">
+            <div id="chartdiv"></div>
+            <div id="chartdivTable">
+                <table class="num">
+                    <tbody>
+                    </tbody>
+                </table>
+                <table class="avialable">
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="menu">
+    <div>
+        <h1>Instructions</h1>
+        <h1>Code Sheet</h1>
+        <h1>Glossary</h1>
+        <h1>FAQ</h1>
+    </div><!--
+ --><div>
+        <h1>How I'm Doing</h1>
+        <h1>Allocat User</h1>
+        <h1>Allocate Adj./MP</h1>
+        <h1>...</h1>
+    </div>
+</div>
+<div id="log">
+    <textarea></textarea>
+</div>
+</body>
+<script type="text/javascript" charset="utf-8">
+    /*
+     if(workLocal)
+     onDeviceReady();
+     else
+     document.addEventListener("deviceready", onDeviceReady, false);
+     */
+
+    //alert("1.Jvavascript is ok");
+
+
+    var delay=1500;//1 seconds
+    setTimeout(function(){
+        onDeviceReadyDelay();
+        //your code to be executed after 1 seconds
+    },delay);
+
+    if(showConsole)
+    {
+        $("#log").css("display","block");
+    }
+
+    if(testStaticApp)
+    {
+        showInstructions(false);
+        codesSetDefaults();
+        //showInstructionsCodes();
+        $("body").css("display","block");
+    }
+
+    if(testParticularHack)
+    {
+        $( "#categorySelect" ).append($("<option></option>").attr("value","Instructions").text("Instructions"));
+        $("#category").val("Instructions");
+    }
+
+</script>
+</html>
