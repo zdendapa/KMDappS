@@ -107,7 +107,7 @@ div.topMenu {
 
 .mainHeader > div {
     display: inline-block;
-    height: 50px;
+    height: 100%;
     vertical-align: top;
 }
 .mainHeader .img {
@@ -118,12 +118,21 @@ div.topMenu {
     text-align: center;
 }
 .mainHeader .plan {
-    width: 20%;
+    width: 25%;
 }
 .mainHeader .planInput {
-    width: 20%;
+    width: 15%;
 }
-
+.mainHeader .planInput input {
+    width: 100%;
+}
+.mainHeader .plan h1
+{
+    text-align: center;
+    font-weight: normal;
+    margin-top: 4px;
+    margin-bottom: 2px;
+}
 .mainHeader .img img {
     width: 100%;
     height: 100%;
@@ -136,7 +145,10 @@ div.topMenu {
     width: 60px;
     text-align: center;
     padding: 3px;
-    font-size: 8px;
+}
+.mainHeader .menu label {
+    display: block;
+    padding-top: 10px;
 }
 
 
@@ -636,10 +648,10 @@ div.instructions {
         width: 20px;
         height: 20px;
     }
-    .mainHeader label, .mainHeader select,
+    .mainHeader .plan h1,.mainHeader h1,.mainHeader label, .mainHeader select,
     .topMenuMiddle div,.topMenu .row, .categoryWidget input {
         font-size: 8px;
-        margin-top: 0px;
+
     }
     .categoryWidget, .categoryWidget select {
         font-size: 0.8em;
@@ -713,7 +725,7 @@ div.instructions {
         width: 20px;
         height: 20px;
     }
-    .mainHeader h1, .mainHeader label, .mainHeader select,
+    .mainHeader .plan h1,.mainHeader h1, .mainHeader label, .mainHeader select,
     .topMenuMiddle div,.topMenu .row, .categoryWidget input {
         font-size: 8px;
     }
@@ -790,6 +802,10 @@ div.instructions {
     .topMenuMiddle div,.topMenu .row, .categoryWidget input {
         font-size: 8px;
     }
+    .mainHeader .plan h1
+    {
+        font-size: 10px;
+    }
     .categoryWidget, .categoryWidget select {
         font-size: 0.8em;
     }
@@ -859,12 +875,18 @@ div.instructions {
     .topMenuMiddle div, .topMenu .row {
         font-size: 0.8em;
     }
+    .mainHeader {
+        height: 70px;
+    }
     .mainHeader h1 {
         font-size: 1em;
         line-height: 1em;
     }
     .mainHeader div.left {
         width: 50%;
+    }
+    .mainHeader .menu label {
+        padding-top: 15px;
     }
     .left > img {
         width: 50px;
@@ -905,9 +927,20 @@ div.instructions {
         width: 25px;
         height: 30px;
     }
+    .mainHeader {
+        height: 100px;
+    }
+    .mainHeader .menu h1
+    {
+        width: 100px;
+    }
     .mainHeader h1 {
-        font-size: 1em;
+        font-size: 1.5em;
         line-height: 1em;
+    }
+
+    .mainHeader .menu label {
+        padding-top: 40px;
     }
     .mainHeader div.left {
         width: 50%;
@@ -956,6 +989,16 @@ div.instructions {
     }
     .topMenu h1{
         font-size: 0.8em;
+    }
+    .mainHeader {
+        height: 150px;
+    }
+    .mainHeader .menu h1
+    {
+        width: 100px;
+    }
+    .mainHeader .menu label {
+        padding-top: 50px;
     }
     .mainHeader h1, .mainHeader label, .mainHeader select,
     .topMenuMiddle div,.topMenu .row {
@@ -1056,9 +1099,19 @@ div.instructions {
         margin-top: 0px;
         font-size: 1em;
     }
+    .mainHeader {
+        height: 200px;
+    }
+    .mainHeader .menu h1
+    {
+        width: 130px;
+    }
+    .mainHeader .menu label {
+        padding-top: 100px;
+    }
     .mainHeader h1, .mainHeader label, .mainHeader select,
     .topMenuMiddle div,.topMenu .row {
-        font-size: 2em;
+        font-size: 1.8em;
     }
     .categoryWidget, .categoryWidget select {
         font-size: 1em;

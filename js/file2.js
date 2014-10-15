@@ -46,7 +46,7 @@ function gotFileSystem(lfs) {
     var path;
     // if android made special path
     if (!workLocal && device && device.platform && device.platform.indexOf('Android') == 0) {
-        path = "Android/data/cz.initedsolutions.kmdTMM/files";
+        path = "Android/data/cz.initedsolutions.kmdTMMs/files";
     } else
     {
         if(workLocal) path = "kmd";
