@@ -20,7 +20,7 @@ var lastSyncDate;   // date of last sync
 
 var db = {
     settings: {
-        shortName: 'kmds_f',
+        shortName: 'kmds_g',
         version: '1.0',
         displayName: 'KMD app',
         maxSize: 655367 // in bytes
@@ -835,7 +835,8 @@ db.tableSummShow = function(success_callback)
     pieData = [];
 
     database.transaction(function(tx){
-        tx.executeSql('SELECT sheetsheaders.shid,code.code,sheetsheaders.planSpend from sheetsheaders JOIN code on sheetsheaders.shid=code.value', [], function(tx, results) {
+        //tx.executeSql('SELECT sheetsheaders.shid,code.code,sheetsheaders.planSpend from sheetsheaders JOIN code on sheetsheaders.shid=code.value', [], function(tx, results) {
+        tx.executeSql('SELECT shid,category,planSpend from sheetsheaders', [], function(tx, results) {
 
             var fun;
             //console.log(results.rows.item(1).shid);
@@ -845,7 +846,7 @@ db.tableSummShow = function(success_callback)
                 {
                     // on the last run function
                     if(i==results.rows.length-1) fun = success_callback;
-                    db.tableSummDataGet(results.rows.item(i).shid, results.rows.item(i).code,results.rows.item(i).planSpend,fun);
+                    db.tableSummDataGet(results.rows.item(i).shid, results.rows.item(i).category,results.rows.item(i).planSpend,fun);
                 }
             } else
             {
@@ -868,6 +869,7 @@ db.tableSummDataGet = function(sh,shName,planSpend,success_callback)
                 var total = 0;
                 for(var i=0;i<results.rows.length;i++)
                 {
+                    console.log(i + shName);
                     total += Number(results.rows.item(i).payment);
                     var s = {};
                 }
