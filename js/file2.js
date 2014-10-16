@@ -324,7 +324,7 @@ function generateXML(writeIt)
         {
             xmlString = "<data>";
             len = results.rows.length;
-            if(len==0)
+            if(len=="aa")
             {
                 xmlString += "no data in db";
             }
@@ -451,25 +451,29 @@ function generateXML(writeIt)
 
                 var shid = "";
                 var shidBefore = false;
-                //fill up category drop-down
-                for (var i=0; i<len; i++){
-                    if(results.rows.item(i).shid!=shid)
-                    {
-                        if(shidBefore)
+                if(len>0)
+                {
+                    //fill up category drop-down
+                    for (var i=0; i<len; i++){
+                        if(results.rows.item(i).shid!=shid)
                         {
-                            xmlString += "</tableData></sheet>";
+                            if(shidBefore)
+                            {
+                                xmlString += "</tableData></sheet>";
+                            }
+                            xmlString += "<sheet><header><shid>"+results.rows.item(i).shid+"</shid><code>" + xmlSpecCharEn(results.rows.item(i).category) + "</code><planSpend>"+results.rows.item(i).planSpend+"</planSpend></header><tableData>";
+                            shidBefore = true;
+                            shid = results.rows.item(i).shid;
                         }
-                        xmlString += "<sheet><header><shid>"+results.rows.item(i).shid+"</shid><code>" + xmlSpecCharEn(results.rows.item(i).category) + "</code><planSpend>"+results.rows.item(i).planSpend+"</planSpend></header><tableData>";
-                        shidBefore = true;
-                        shid = results.rows.item(i).shid;
+                        xmlString += "<row>";
+                        xmlString += "<rowID>"+results.rows.item(i).rowid+"</rowID><date>"+results.rows.item(i).dater+"</date><paid>"+results.rows.item(i).paid+"</paid><desc>"+xmlSpecCharEn(results.rows.item(i).desc)+"</desc><ref>"+xmlSpecCharEn(results.rows.item(i).checkRef)+"</ref>"
+                        xmlString += "<payment>"+results.rows.item(i).payment+"</payment><available>"+results.rows.item(i).balance+"</available>";
+                        xmlString += "<synced>"+results.rows.item(i).synced+"</synced>";
+                        xmlString += "</row>";
                     }
-                    xmlString += "<row>";
-                    xmlString += "<rowID>"+results.rows.item(i).rowid+"</rowID><date>"+results.rows.item(i).dater+"</date><paid>"+results.rows.item(i).paid+"</paid><desc>"+xmlSpecCharEn(results.rows.item(i).desc)+"</desc><ref>"+xmlSpecCharEn(results.rows.item(i).checkRef)+"</ref>"
-                    xmlString += "<payment>"+results.rows.item(i).payment+"</payment><available>"+results.rows.item(i).balance+"</available>";
-                    xmlString += "<synced>"+results.rows.item(i).synced+"</synced>";
-                    xmlString += "</row>";
+                    xmlString += "</tableData></sheet>";
                 }
-                xmlString += "</tableData></sheet>";
+
 
             }
 

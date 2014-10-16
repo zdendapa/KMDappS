@@ -20,7 +20,7 @@ var lastSyncDate;   // date of last sync
 
 var db = {
     settings: {
-        shortName: 'kmds_e',
+        shortName: 'kmds_f',
         version: '1.0',
         displayName: 'KMD app',
         maxSize: 655367 // in bytes
@@ -207,9 +207,11 @@ db.initSheetsData = function()
                 showInstructions(true);
                 //showInstructionsCodes();
 
-                $("#categorySelect").append($("<option></option>").attr("value","1").text("4021, Suspense"));
+                $("#categorySelect").append($("<option></option>").attr("value","1").text("4021 Suspense"));
+                $("#categorySelect").append($("<option></option>").attr("value","1").text("Code Sheet"));
 
                 db.CreateTableSuspense();
+                db.CreateTableCategory();
 
                 $("body").css("display","block");
 
@@ -270,16 +272,26 @@ db.CreateNextTable = function()
 
 db.CreateTableSuspense = function()
 {
-    logging("CreateNextTable",1);
+    logging("CreateTableSuspense",1);
     database.transaction(function(tx)
     {
         database.transaction(function(tx){
-            tx.executeSql('INSERT INTO sheetsheaders (shid,category, code, planSpend) VALUES ('+1+',"", "", "0.00")');
+            tx.executeSql('INSERT INTO sheetsheaders (shid,category, code, planSpend) VALUES ('+1+',"4021 Suspense", "4021 Suspense", "0.00")');
         }, errorCB);
     }, errorCB);
 };
 
 
+db.CreateTableCategory = function()
+{
+    logging("CreateTableCategory",1);
+    database.transaction(function(tx)
+    {
+        database.transaction(function(tx){
+            tx.executeSql('INSERT INTO sheetsheaders (shid,category, code, planSpend) VALUES ('+2+',"Code Sheet", "Code Sheet", "0.00")');
+        }, errorCB);
+    }, errorCB);
+};
 
 db.headerUpdate = function()
 {
